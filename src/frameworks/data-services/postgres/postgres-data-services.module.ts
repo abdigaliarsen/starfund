@@ -7,12 +7,9 @@ import { IDataServices } from 'src/core';
 
 @Module({
     imports: [TypeOrmModule.forRoot({
-        type: 'postgres',
-        host: DATA_BASE_CONFIGURATION.postgreHost,
-        port: parseInt(DATA_BASE_CONFIGURATION.postgrePort),
-        username: DATA_BASE_CONFIGURATION.username,
-        password: DATA_BASE_CONFIGURATION.password,
-        database: DATA_BASE_CONFIGURATION.database,
+        type: 'mysql',
+        host: DATA_BASE_CONFIGURATION.mysqlHost,
+        port: parseInt(DATA_BASE_CONFIGURATION.mysqlPort),
         entities: [Event, Fight, Fighter, FighterPersonalData, FighterStats],
         synchronize: true,
     })],
