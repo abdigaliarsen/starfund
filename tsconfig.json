@@ -15,7 +15,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "incremental": true,
+    "incremental": false,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "noImplicitAny": false,
@@ -23,5 +23,6 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
