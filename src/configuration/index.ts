@@ -1,11 +1,13 @@
-import { configDotenv } from "dotenv";
+import { config } from "dotenv";
+import { ConfigService } from "@nestjs/config";
 
-configDotenv();
+config();
+const configService = new ConfigService();
 
 export const DATA_BASE_CONFIGURATION = {
-    mysqlHost: process.env.MYSQL_HOST as string,
-    mysqlPort: process.env.MYSQL_PORT as string,
-    mysqlUser: process.env.MYSQL_USER as string,
-    mysqlPassword: process.env.MYSQL_PASSWORD as string,
-    mysqlDatabase: process.env.MYSQL_DATABASE as string
+    mysqlHost: configService.getOrThrow<string>('MYSQL_HOST'),
+    mysqlPort: configService.getOrThrow<string>('MYSQL_PORT'),
+    mysqlUser: configService.getOrThrow<string>('MYSQL_USER'),
+    mysqlPassword: configService.getOrThrow<string>('MYSQL_PASSWORD'),
+    mysqlDatabase: configService.getOrThrow<string>('MYSQL_DATABASE'),
 };
