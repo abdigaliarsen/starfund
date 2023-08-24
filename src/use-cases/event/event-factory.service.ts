@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { EventDto, CreateEventDto, UpdateEventDto } from "../../core/dtos/event.dto";
+
 @Injectable()
 export class EventFactoryService {
     createNewEvent(createEventDto: CreateEventDto) {
