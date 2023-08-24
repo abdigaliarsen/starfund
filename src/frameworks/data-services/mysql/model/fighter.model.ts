@@ -2,18 +2,10 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToMany, JoinColum
 import { FighterStats } from "./fighterStats.model";
 import { FighterPersonalData } from "./fighterPersonalData.model";
 import { Event } from "./event.model";
+import { BaseEntity } from "./base.model";
 
 @Entity()
-export class Fighter {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;
-
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    updatedAt: Date;
-
+export class Fighter extends BaseEntity {
     @OneToOne(_ => FighterStats, stats => stats.fighter)
     @JoinColumn()
     fighterStats: FighterStats;

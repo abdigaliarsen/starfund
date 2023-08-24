@@ -1,18 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne } from "typeorm";
 import { Fighter } from "./fighter.model";
 import { Event } from "./event.model";
+import { BaseEntity } from "./base.model";
 
 @Entity()
-export class Fight {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;
-
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    updatedAt: Date;
-
+export class Fight extends BaseEntity {
     @ManyToMany(() => Fighter)
     fighter1: Fighter;
 
