@@ -2,7 +2,7 @@ import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { IDataServices } from "../../../core";
 import { Repository } from "typeorm";
-import { Event, Fight, Fighter, FighterPersonalData, FighterStats } from "./model";
+import { Event, Fight, Fighter, FighterPersonalData, FighterStats, FightersFights } from "./model";
 import { MySQLGenericRepository } from "./mysql-generic-repository";
 
 @Injectable()
@@ -12,6 +12,7 @@ export class MySQLDataServices implements IDataServices, OnApplicationBootstrap 
     fighters: MySQLGenericRepository<Fighter>;
     fighterPersonalData: MySQLGenericRepository<FighterPersonalData>;
     fighterStats: MySQLGenericRepository<FighterStats>;
+    fightersFights: MySQLGenericRepository<FightersFights>;
     
     constructor(
         @InjectRepository(Event)
@@ -23,7 +24,9 @@ export class MySQLDataServices implements IDataServices, OnApplicationBootstrap 
         @InjectRepository(FighterPersonalData)
         private readonly _fighterPersonalDataRepository: Repository<FighterPersonalData>,
         @InjectRepository(FighterStats)
-        private readonly _fighterStatsRepository: Repository<FighterStats>
+        private readonly _fighterStatsRepository: Repository<FighterStats>,
+        @InjectRepository(FightersFights)
+        private readonly _fightersFightsRepository: Repository<FightersFights>
     ) {}
 
     async onApplicationBootstrap() {
@@ -32,5 +35,6 @@ export class MySQLDataServices implements IDataServices, OnApplicationBootstrap 
         this.fighters = new MySQLGenericRepository<Fighter>(this._fighterRepository);
         this.fighterPersonalData = new MySQLGenericRepository<FighterPersonalData>(this._fighterPersonalDataRepository);
         this.fighterStats = new MySQLGenericRepository<FighterStats>(this._fighterStatsRepository);
+        this.fightersFights = new MySQLGenericRepository<FightersFights>(this._fightersFightsRepository);
     };
 }

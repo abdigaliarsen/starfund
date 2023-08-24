@@ -12,6 +12,8 @@ import { FightUseCasesModule } from './use-cases/fight/fight-use-cases.module';
 import { FighterUseCasesModule } from './use-cases/fighter/fighter-use-cases.module';
 import { FighterPersonalDataUseCasesModule } from './use-cases/fighterPersonalData/fighterPersonalData-use-cases.module';
 import { FighterStatsUseCasesModule } from './use-cases/fighterStats/fighterStats-use-cases.module';
+import { FightersFightsController } from './controllers/fightersFights.controller';
+import { FightersFightsUseCasesModule } from './use-cases/fightersFight/fightersFight-use-cases.module';
 
 @Module({
 	imports: [
@@ -20,14 +22,16 @@ import { FighterStatsUseCasesModule } from './use-cases/fighterStats/fighterStat
 		FightUseCasesModule,
 		FighterUseCasesModule,
 		FighterPersonalDataUseCasesModule,
-		FighterStatsUseCasesModule
+		FighterStatsUseCasesModule,
+		FightersFightsUseCasesModule
 	],
 	controllers: [
 		EventController,
 		FightController,
 		FighterController,
 		FighterStatsController,
-		FighterPersonalDataController
+		FighterPersonalDataController,
+		FightersFightsController
 	],
 	providers: []
 })

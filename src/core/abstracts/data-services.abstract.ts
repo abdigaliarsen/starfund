@@ -3,7 +3,8 @@ import {
     Fight,
     Fighter,
     FighterPersonalData,
-    FighterStats
+    FighterStats,
+    FightersFights
 } from "src/frameworks/data-services/mysql/model";
 
 import { IGenericRepository } from "./generic-repository.abstract";
@@ -18,4 +19,6 @@ export abstract class IDataServices {
     abstract fighterPersonalData: IGenericRepository<FighterPersonalData>;
 
     abstract fighterStats: IGenericRepository<FighterStats>;
+
+    abstract fightersFights: IGenericRepository<FightersFights>;
 };
