@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import {
 	EventController,
 	FightController,
-	FighterController
+	FighterController,
+	FighterPersonalDataController,
+	FighterStatsController,
 } from 'src/controllers';
 import { DataServicesModule } from './services/data-services/data-services.module';
 import { EventUseCasesModule } from './use-cases/event/event-use-cases.module';
@@ -23,7 +25,9 @@ import { FighterStatsUseCasesModule } from './use-cases/fighterStats/fighterStat
 	controllers: [
 		EventController,
 		FightController,
-		FighterController
+		FighterController,
+		FighterStatsController,
+		FighterPersonalDataController
 	],
 	providers: []
 })
