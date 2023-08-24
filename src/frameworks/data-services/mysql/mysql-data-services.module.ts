@@ -11,6 +11,9 @@ import { IDataServices } from 'src/core';
             type: 'mysql',
             host: DATA_BASE_CONFIGURATION.mysqlHost,
             port: parseInt(DATA_BASE_CONFIGURATION.mysqlPort),
+            username: DATA_BASE_CONFIGURATION.mysqlUser,
+            password: DATA_BASE_CONFIGURATION.mysqlPassword,
+            database: DATA_BASE_CONFIGURATION.mysqlDatabase,
             entities: [Event, Fight, Fighter, FighterPersonalData, FighterStats]
         }),
         TypeOrmModule.forFeature([Event, Fight, Fighter, FighterPersonalData, FighterStats])
