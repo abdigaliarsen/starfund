@@ -1,73 +1,70 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+CREATE TABLE `fighter_stats` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `wins` int NOT NULL,
+  `losses` int NOT NULL,
+  `knockouts` int NOT NULL,
+  `submissions` int NOT NULL,
+  `lastFightDate` date NOT NULL,
+  `careerDisclosedEarnings` int NOT NULL,
+  PRIMARY KEY (`id`)
+);
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+CREATE TABLE `fighter_personal_data` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fullname` varchar(255) NOT NULL,
+  `nickname` varchar(255) NOT NULL,
+  `age` int NOT NULL,
+  `dateOfBirth` date NOT NULL,
+  `weightClass` varchar(255) NOT NULL,
+  `weight` int NOT NULL,
+  `height` int NOT NULL,
+  `reach` int NOT NULL,
+  `born` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+CREATE TABLE `fighter` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ranking` int NOT NULL,
+  `fighterStatsId` int NULL,
+  `fighterPersonalDataId` int NULL,
+  UNIQUE INDEX `REL_5a0e36a153e18834f4acb76ec2` (`fighterStatsId`),
+  UNIQUE INDEX `REL_9cb29876fbc59bfb23db95ab2b` (`fighterPersonalDataId`),
+  PRIMARY KEY (`id`)
+);
 
-## Description
+CREATE TABLE `fight` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `eventId` int NULL,
+  PRIMARY KEY (`id`)
+);
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+CREATE TABLE `event` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `title` varchar(255) NOT NULL,
+  `dateAndTime` date NOT NULL,
+  `location` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
 
-## Installation
+ALTER TABLE `fighter` ADD CONSTRAINT `FK_5a0e36a153e18834f4acb76ec22` 
+FOREIGN KEY (`fighterStatsId`) REFERENCES `fighter_stats`(`id`) 
+ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-```bash
-$ npm install
-```
+ALTER TABLE `fighter` ADD CONSTRAINT `FK_9cb29876fbc59bfb23db95ab2be` 
+FOREIGN KEY (`fighterPersonalDataId`) REFERENCES `fighter_personal_data`(`id`) 
+ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+ALTER TABLE `fight` ADD CONSTRAINT `FK_5b977841fa5df7809fede4adb2b` 
+FOREIGN KEY (`eventId`) REFERENCES `event`(`id`) 
+ON DELETE NO ACTION ON UPDATE NO ACTION;
