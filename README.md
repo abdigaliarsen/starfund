@@ -1,3 +1,4 @@
+```sql
 CREATE TABLE `fighter_stats` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -10,9 +11,11 @@ CREATE TABLE `fighter_stats` (
   `careerDisclosedEarnings` int NOT NULL,
   PRIMARY KEY (`id`)
 );
+```
 
 ![Fighters Stats Table](./assets/FighterStatsTable.png)
 
+```sql
 CREATE TABLE `fighter_personal_data` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -28,9 +31,11 @@ CREATE TABLE `fighter_personal_data` (
   `born` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
+```
 
 ![Fighter Personal Data Table](./assets/FighterPersonalDataTable.png)
 
+```sql
 CREATE TABLE `fighter` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -42,9 +47,11 @@ CREATE TABLE `fighter` (
   UNIQUE INDEX `REL_9cb29876fbc59bfb23db95ab2b` (`fighterPersonalDataId`),
   PRIMARY KEY (`id`)
 );
+```
 
 ![Fighters Table](./assets/FightersTable.png)
 
+```sql
 CREATE TABLE `fight` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -52,9 +59,11 @@ CREATE TABLE `fight` (
   `eventId` int NULL,
   PRIMARY KEY (`id`)
 );
+```
 
 ![Fights Table](./assets/FightsTable.png)
 
+```sql
 CREATE TABLE `event` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -64,9 +73,11 @@ CREATE TABLE `event` (
   `location` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
+```
 
 ![Events Table](./assets/EventsTable.png)
 
+```sql
 ALTER TABLE `fighter` ADD CONSTRAINT `FK_5a0e36a153e18834f4acb76ec22` 
 FOREIGN KEY (`fighterStatsId`) REFERENCES `fighter_stats`(`id`) 
 ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -78,5 +89,6 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `fight` ADD CONSTRAINT `FK_5b977841fa5df7809fede4adb2b` 
 FOREIGN KEY (`eventId`) REFERENCES `event`(`id`) 
 ON DELETE NO ACTION ON UPDATE NO ACTION;
+```
 
 ![Tables](./assets/Tables.png)
