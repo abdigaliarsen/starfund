@@ -39,4 +39,8 @@ export class FighterPersonalDataUseCases {
             return plainToClass(FighterPersonalDataDto, fighterPersonalData_1);
         });
     }
+
+    async deleteFighterPersonalData(fighterPersonalDataId: number): Promise<void> {
+        return this.dataServices.fighterPersonalData.delete(fighterPersonalDataId);
+    }
 };

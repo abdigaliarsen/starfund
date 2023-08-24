@@ -39,4 +39,8 @@ export class MySQLGenericRepository<T extends BaseEntity> implements IGenericRep
         
         return { ...entity, id: entityId };
     }
+
+    async delete(entityId: number): Promise<void> {
+        this._repository.delete(entityId);
+    }
 }

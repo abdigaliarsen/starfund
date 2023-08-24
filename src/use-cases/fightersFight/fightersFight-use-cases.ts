@@ -39,4 +39,8 @@ export class FightersFightsUseCases {
             return plainToClass(FightersFightsDto, fightersFights_1);
         });
     }
+
+    async deleteFightersFights(fightersFightsId: number): Promise<void> {
+        return this.dataServices.fightersFights.delete(fightersFightsId);
+    }
 };

@@ -39,4 +39,8 @@ export class EventUseCases {
             return plainToClass(EventDto, event_1);
         });
     }
+
+    async deleteEvent(eventId: number): Promise<void> {
+        return this.dataServices.events.delete(eventId);
+    }
 };

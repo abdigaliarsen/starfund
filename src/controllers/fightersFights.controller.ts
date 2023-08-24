@@ -1,5 +1,5 @@
 import { CreateFightersFightsDto, FightersFightsDto, UpdateFightersFightsDto } from '@/core/dtos/fightersFights.dto';
-import { Controller, Get, Post, Put, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Param, Body, Delete } from '@nestjs/common';
 import { FightersFightsUseCases } from 'src/use-cases/fightersFight/fightersFight-use-cases';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
@@ -30,5 +30,11 @@ export class FightersFightsController {
     @ApiResponse({ type: FightersFightsDto, status: 200, description: 'Update fighterPersonalData' })
     async updateFighterPersonalData(@Param('id') id: number, @Body() fightersFights: UpdateFightersFightsDto): Promise<FightersFightsDto> {
         return await this.fightersFights.updateFightersFights(id, fightersFights);
+    }
+
+    @Delete(':id')
+    @ApiResponse({ status: 200, description: 'Delete fighterPersonalData' })
+    async deleteFighterPersonalData(@Param('id') id: number): Promise<void> {
+        return await this.fightersFights.deleteFightersFights(id);
     }
 }

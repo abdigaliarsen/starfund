@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Param, Body, Delete } from '@nestjs/common';
 import { FighterDto } from 'src/core';
 import { FighterUseCases } from 'src/use-cases/fighter/fighter-use-cases';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
@@ -30,5 +30,11 @@ export class FighterController {
     @ApiResponse({ type: FighterDto, status: 200, description: 'Update fighter' })
     async updateFighter(@Param('id') id: number, @Body() fighter: FighterDto): Promise<FighterDto> {
         return await this.fighterUseCases.updateFighter(id, fighter);
+    }
+
+    @Delete(':id')
+    @ApiResponse({ status: 200, description: 'Delete fighter' })
+    async deleteFighter(@Param('id') id: number): Promise<void> {
+        return await this.fighterUseCases.deleteFighter(id);
     }
 }

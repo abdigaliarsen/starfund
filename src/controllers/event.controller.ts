@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Param, Body, Delete } from '@nestjs/common';
 import { EventDto } from 'src/core';
 import { EventUseCases } from 'src/use-cases/event/event-use-cases';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
@@ -30,5 +30,11 @@ export class EventController {
     @ApiResponse({ type: EventDto, status: 200, description: 'Update event' })
     async updateEvent(@Param('id') id: number, @Body() event: EventDto): Promise<EventDto> {
         return await this.eventUseCases.updateEvent(id, event);
+    }
+
+    @Delete(':id')
+    @ApiResponse({ status: 200, description: 'Delete event' })
+    async deleteEvent(@Param('id') id: number): Promise<void> {
+        return await this.eventUseCases.deleteEvent(id);
     }
 }
