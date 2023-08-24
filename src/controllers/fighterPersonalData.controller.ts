@@ -7,22 +7,22 @@ export class FighterPersonalDataController {
     constructor(private readonly fighterPersonalDataUseCases: FighterPersonalDataUseCases) {}
 
     @Get()
-    async getFighterPersonalDatas() {
+    async getFighterPersonalDatas(): Promise<FighterPersonalDataDto[]> {
         return await this.fighterPersonalDataUseCases.getAllFighterPersonalData();
     }
 
     @Get(':id')
-    async getFighterPersonalDataById(@Param('id') id: number) {
+    async getFighterPersonalDataById(@Param('id') id: number): Promise<FighterPersonalDataDto> {
         return await this.fighterPersonalDataUseCases.getFighterPersonalDataById(id);
     }
 
     @Post()
-    async createFighterPersonalData(@Body() fighterPersonalData: FighterPersonalDataDto) {
+    async createFighterPersonalData(@Body() fighterPersonalData: FighterPersonalDataDto): Promise<FighterPersonalDataDto> {
         return await this.fighterPersonalDataUseCases.createFighterPersonalData(fighterPersonalData);
     }
 
     @Put(':id')
-    async updateFighterPersonalData(@Param('id') id: number, @Body() fighterPersonalData: FighterPersonalDataDto) {
+    async updateFighterPersonalData(@Param('id') id: number, @Body() fighterPersonalData: FighterPersonalDataDto): Promise<FighterPersonalDataDto> {
         return await this.fighterPersonalDataUseCases.updateFighterPersonalData(id, fighterPersonalData);
     }
 }

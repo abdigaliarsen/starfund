@@ -7,22 +7,22 @@ export class EventController {
     constructor(private readonly eventUseCases: EventUseCases) {}
 
     @Get()
-    async getEvents() {
+    async getEvents(): Promise<EventDto[]> {
         return await this.eventUseCases.getAllEvent();
     }
 
     @Get(':id')
-    async getEventById(@Param('id') id: number) {
+    async getEventById(@Param('id') id: number): Promise<EventDto> {
         return await this.eventUseCases.getEventById(id);
     }
 
     @Post()
-    async createEvent(@Body() event: EventDto) {
+    async createEvent(@Body() event: EventDto): Promise<EventDto> {
         return await this.eventUseCases.createEvent(event);
     }
 
     @Put(':id')
-    async updateEvent(@Param('id') id: number, @Body() event: EventDto) {
+    async updateEvent(@Param('id') id: number, @Body() event: EventDto): Promise<EventDto> {
         return await this.eventUseCases.updateEvent(id, event);
     }
 }
