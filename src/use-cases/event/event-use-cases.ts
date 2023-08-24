@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { CreateEventDto, EventDto, UpdateEventDto } from "../../core/dtos/event.dto";
 import { IDataServices } from "../../core/abstracts";
-import { Event } from "src/frameworks/data-services/postgres/model";
+import { Event } from "src/frameworks/data-services/mysql/model";
 import { plainToClass } from "class-transformer";
 import { EventFactoryService } from "./event-factory.service";
 

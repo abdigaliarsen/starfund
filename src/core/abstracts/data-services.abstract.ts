@@ -4,7 +4,8 @@ import {
     Fighter,
     FighterPersonalData,
     FighterStats
-} from "src/frameworks/data-services/postgres/model";
+} from "src/frameworks/data-services/mysql/model";
+
 import { IGenericRepository } from "./generic-repository.abstract";
 
 export abstract class IDataServices {

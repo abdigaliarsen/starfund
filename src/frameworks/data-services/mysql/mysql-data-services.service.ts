@@ -3,15 +3,15 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { IDataServices } from "../../../core";
 import { Repository } from "typeorm";
 import { Event, Fight, Fighter, FighterPersonalData, FighterStats } from "./model";
-import { PostgresGenericRepository } from "./postgres-generic-repository";
+import { MySQLGenericRepository } from "./mysql-generic-repository";
 
 @Injectable()
-export class PostgresDataServices implements IDataServices, OnApplicationBootstrap {
-    events: PostgresGenericRepository<Event>;
-    fights: PostgresGenericRepository<Fight>;
-    fighters: PostgresGenericRepository<Fighter>;
-    fighterPersonalData: PostgresGenericRepository<FighterPersonalData>;
-    fighterStats: PostgresGenericRepository<FighterStats>;
+export class MySQLDataServices implements IDataServices, OnApplicationBootstrap {
+    events: MySQLGenericRepository<Event>;
+    fights: MySQLGenericRepository<Fight>;
+    fighters: MySQLGenericRepository<Fighter>;
+    fighterPersonalData: MySQLGenericRepository<FighterPersonalData>;
+    fighterStats: MySQLGenericRepository<FighterStats>;
     
     constructor(
         @InjectRepository(Event)
@@ -27,10 +27,10 @@ export class PostgresDataServices implements IDataServices, OnApplicationBootstr
     ) {}
 
     async onApplicationBootstrap() {
-        this.events = new PostgresGenericRepository<Event>(this._eventRepository);
-        this.fights = new PostgresGenericRepository<Fight>(this._fightRepository);
-        this.fighters = new PostgresGenericRepository<Fighter>(this._fighterRepository);
-        this.fighterPersonalData = new PostgresGenericRepository<FighterPersonalData>(this._fighterPersonalDataRepository);
-        this.fighterStats = new PostgresGenericRepository<FighterStats>(this._fighterStatsRepository);
+        this.events = new MySQLGenericRepository<Event>(this._eventRepository);
+        this.fights = new MySQLGenericRepository<Fight>(this._fightRepository);
+        this.fighters = new MySQLGenericRepository<Fighter>(this._fighterRepository);
+        this.fighterPersonalData = new MySQLGenericRepository<FighterPersonalData>(this._fighterPersonalDataRepository);
+        this.fighterStats = new MySQLGenericRepository<FighterStats>(this._fighterStatsRepository);
     };
 }

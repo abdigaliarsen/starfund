@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { IGenericRepository } from "src/core";
 
-export class PostgresGenericRepository<T> implements IGenericRepository<T> {
+export class MySQLGenericRepository<T> implements IGenericRepository<T> {
     private _repository: Repository<T>;
     private _populateOnFind: string[];
 

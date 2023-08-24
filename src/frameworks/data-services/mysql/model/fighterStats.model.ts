@@ -1,9 +1,17 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from "typeorm";
 import { Fighter } from "./fighter.model";
-import { BaseEntity } from "./base.model";
 
 @Entity()
-export class FighterStats extends BaseEntity {
+export class FighterStats {
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    createdAt: Date;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    updatedAt: Date;
+
     @Column()
     wins: number;
 

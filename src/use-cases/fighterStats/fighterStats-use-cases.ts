@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { CreateFighterStatsDto, FighterStatsDto, UpdateFighterStatsDto } from "../../core/dtos/fighterStats.dto";
 import { IDataServices } from "../../core/abstracts";
-import { FighterStats } from "src/frameworks/data-services/postgres/model";
+import { FighterStats } from "src/frameworks/data-services/mysql/model";
 import { plainToClass } from "class-transformer";
 import { FighterStatsFactoryService } from "./fighterStats-factory.service";
 

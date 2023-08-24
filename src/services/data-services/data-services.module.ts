@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
-import { PostgresDataServicesModule } from "src/frameworks/data-services/postgres/postgres-data-services.module";
+import { MySQLDataServicesModule } from "src/frameworks/data-services/mysql/mysql-data-services.module";
 
 @Module({
-    imports: [PostgresDataServicesModule],
-    exports: [PostgresDataServicesModule]
+    imports: [MySQLDataServicesModule],
+    exports: [MySQLDataServicesModule]
 })
 export class DataServicesModule {}
