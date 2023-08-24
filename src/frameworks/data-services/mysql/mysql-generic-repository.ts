@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 import { IGenericRepository } from "src/core";
 import { BaseEntity } from "./model/base.model";
+import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 
 export class MySQLGenericRepository<T extends BaseEntity> implements IGenericRepository<T> {
     private _repository: Repository<T>;
@@ -27,10 +28,15 @@ export class MySQLGenericRepository<T extends BaseEntity> implements IGenericRep
         return this._repository.save(entity);
     }
 
-    update(entityId: number, entity: T): Promise<T> {
-        entity.id = entityId;
-        return this._repository.save({
-            ...entity
-        });
+    async update(entityId: number, entity: T): Promise<T> {
+        entity["updatedAt"] = new Date();
+        await this._repository
+            .createQueryBuilder()
+            .update()
+            .set({ ...entity as QueryDeepPartialEntity<T> })
+            .where("id = :id", { id: entityId })
+            .execute();
+        
+        return { ...entity, id: entityId };
     }
 }
