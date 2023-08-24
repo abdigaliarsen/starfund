@@ -16,18 +16,11 @@ export class MySQLGenericRepository<T extends BaseEntity> implements IGenericRep
     }
 
     // TODO: replace find with findOneBy
-    async get(entityId: number): Promise<T> {
-        const entity = this._repository.find({ relations: this._populateOnFind }).then((entities: T[]) =>
-            entities.find((entity: T) => entity.id === entityId)
-        ).then((entity: T) => {
-            if (!entity) {
-                throw new Error(`Entity with id ${entityId} not found`);
-            }
-
-            return entity;
-        });
-
-        return entity;
+    get(entityId: number): Promise<T | null> {
+        return this._repository
+            .createQueryBuilder()
+            .where("id = :id", { id: entityId })
+            .getOne();
     }
 
     create(entity: T): Promise<T> {
