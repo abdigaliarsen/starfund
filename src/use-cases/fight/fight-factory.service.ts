@@ -4,22 +4,16 @@ import { FightDto, CreateFightDto, UpdateFightDto } from "../../core/dtos/fight.
 @Injectable()
 export class FightFactoryService {
     createNewFight(createFightDto: CreateFightDto) {
-        const fight = new FightDto();
-
-        fight.eventId = createFightDto.eventId;
-        fight.fighter1Id = createFightDto.fighter1Id;
-        fight.fighter2Id = createFightDto.fighter2Id;
-
+        const fight: FightDto = {
+            eventId: createFightDto.eventId,
+            fighter1Id: createFightDto.fighter1Id,
+            fighter2Id: createFightDto.fighter2Id,
+        };
+        
         return fight;
     }
 
     updateFight(updateFightDto: UpdateFightDto) {
-        const fight = new FightDto();
-
-        fight.eventId = updateFightDto.eventId;
-        fight.fighter1Id = updateFightDto.fighter1Id;
-        fight.fighter2Id = updateFightDto.fighter2Id;
-
-        return fight;
+        return { ...new FightDto(), ...updateFightDto };
     }
 }

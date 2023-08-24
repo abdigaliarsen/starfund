@@ -4,22 +4,18 @@ import { EventDto, CreateEventDto, UpdateEventDto } from "../../core/dtos/event.
 @Injectable()
 export class EventFactoryService {
     createNewEvent(createEventDto: CreateEventDto) {
-        const event = new EventDto();
-
-        event.title = createEventDto.title;
-        event.location = createEventDto.location;
-        event.dateAndTime = createEventDto.dateAndTime;
+        const event: EventDto = {
+            title: createEventDto.title,
+            location: createEventDto.location,
+            dateAndTime: createEventDto.dateAndTime,
+            fights: createEventDto.fights ?? [],
+            participatingFighters: createEventDto.participatingFighters ?? [],
+        };
 
         return event;
     }
 
     updateEvent(updateEventDto: UpdateEventDto) {
-        const event = new EventDto();
-
-        event.title = updateEventDto.title;
-        event.location = updateEventDto.location;
-        event.dateAndTime = updateEventDto.dateAndTime;
-
-        return event;
+        return { ...new EventDto(), ...updateEventDto };
     }
 }

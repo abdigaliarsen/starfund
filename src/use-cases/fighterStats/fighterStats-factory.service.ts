@@ -4,30 +4,20 @@ import { CreateFighterStatsDto, FighterStatsDto, UpdateFighterStatsDto } from "s
 @Injectable()
 export class FighterStatsFactoryService {
     createNewFighterStats(createFighterStatsDto: CreateFighterStatsDto) {
-        const fighterStats = new FighterStatsDto();
-
-        fighterStats.fighterId = createFighterStatsDto.fighterId;
-        fighterStats.wins = createFighterStatsDto.wins;
-        fighterStats.losses = createFighterStatsDto.losses;
-        fighterStats.careerDisclosedEarnings = createFighterStatsDto.careerDisclosedEarnings;
-        fighterStats.knockouts = createFighterStatsDto.knockouts;
-        fighterStats.submissions = createFighterStatsDto.submissions;
-        fighterStats.lastFightDate = createFighterStatsDto.lastFightDate;
+        const fighterStats: FighterStatsDto = {
+            fighterId: createFighterStatsDto.fighterId,
+            wins: createFighterStatsDto.wins,
+            losses: createFighterStatsDto.losses,
+            careerDisclosedEarnings: createFighterStatsDto.careerDisclosedEarnings,
+            knockouts: createFighterStatsDto.knockouts,
+            submissions: createFighterStatsDto.submissions,
+            lastFightDate: createFighterStatsDto.lastFightDate,
+        };
 
         return fighterStats;
     }
 
     updateFighterStats(updateFighterStatsDto: UpdateFighterStatsDto) {
-        const fighterStats = new FighterStatsDto();
-
-        fighterStats.fighterId = updateFighterStatsDto.fighterId;
-        fighterStats.wins = updateFighterStatsDto.wins;
-        fighterStats.losses = updateFighterStatsDto.losses;
-        fighterStats.careerDisclosedEarnings = updateFighterStatsDto.careerDisclosedEarnings;
-        fighterStats.knockouts = updateFighterStatsDto.knockouts;
-        fighterStats.submissions = updateFighterStatsDto.submissions;
-        fighterStats.lastFightDate = updateFighterStatsDto.lastFightDate;
-
-        return fighterStats;
+        return { ...new FighterStatsDto(), ...updateFighterStatsDto };
     }
 }
