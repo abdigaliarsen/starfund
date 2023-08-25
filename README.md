@@ -1,3 +1,5 @@
+![Entity Relationship Diagram](./assets/ERD.png)
+
 ```sql
 -- Create fighter_stats table
 CREATE TABLE `fighter_stats` (
