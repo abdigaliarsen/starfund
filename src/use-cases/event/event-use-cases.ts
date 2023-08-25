@@ -4,6 +4,7 @@ import { IDataServices } from "../../core/abstracts";
 import { Event } from "src/frameworks/data-services/mysql/model";
 import { plainToClass } from "class-transformer";
 import { EventFactoryService } from "./event-factory.service";
+import { FighterDto } from "@/core";
 
 @Injectable()
 export class EventUseCases {
@@ -42,5 +43,12 @@ export class EventUseCases {
 
     async deleteEvent(eventId: number): Promise<void> {
         return this.dataServices.events.delete(eventId);
+    }
+
+    async getEventFighters(eventId: number): Promise<FighterDto[]> {
+        const fighters = await this.dataServices.events.getFightersByEventId(eventId);
+        return fighters.map((fighter: FighterDto) => {
+            return plainToClass(FighterDto, fighter);
+        });
     }
 };

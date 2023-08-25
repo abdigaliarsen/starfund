@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Put, Param, Body, Delete } from '@nestjs/common';
-import { EventDto } from 'src/core';
+import { EventDto, FighterDto } from 'src/core';
 import { EventUseCases } from 'src/use-cases/event/event-use-cases';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
@@ -36,5 +36,11 @@ export class EventController {
     @ApiResponse({ status: 200, description: 'Delete event' })
     async deleteEvent(@Param('id') id: number): Promise<void> {
         return await this.eventUseCases.deleteEvent(id);
+    }
+
+    @Get(':id/fighters')
+    @ApiResponse({ type: Array<EventDto>, status: 200, description: 'Get event fighters' })
+    async getEventFighters(@Param('id') id: number): Promise<FighterDto[]> {
+        return await this.eventUseCases.getEventFighters(id);
     }
 }
