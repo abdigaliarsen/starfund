@@ -1,5 +1,4 @@
-```
-sql
+```sql
 -- Create fighter_stats table
 CREATE TABLE `fighter_stats` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -12,8 +11,12 @@ CREATE TABLE `fighter_stats` (
   `lastFightDate` date NOT NULL,
   `careerDisclosedEarnings` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+);
+```
 
+[Fighter Stats Table](./assets/FighterStatsTable.png)
+
+```sql
 -- Create fighter_personal_data table
 CREATE TABLE `fighter_personal_data` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -29,8 +32,12 @@ CREATE TABLE `fighter_personal_data` (
   `reach` int NOT NULL,
   `born` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+);
+```
 
+[Fighter Personal Data Table](./assets/FighterPersonalDataTable.png)
+
+```sql
 -- Create fighter table
 CREATE TABLE `fighter` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -42,8 +49,12 @@ CREATE TABLE `fighter` (
   UNIQUE INDEX `REL_fighter_stats_id` (`fighterStatsId`),
   UNIQUE INDEX `REL_fighter_personal_data_id` (`fighterPersonalDataId`),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+);
+```
 
+[Fighters Table](./assets/FightersTable.png)
+
+```sql
 -- Create fighters_fights table
 CREATE TABLE `fighters_fights` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -52,8 +63,12 @@ CREATE TABLE `fighters_fights` (
   `fighterId` int NOT NULL,
   `fightId` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+);
+```
 
+[Fighters Fights Table](./assets/FightersFightsTable.png)
+
+```sql
 -- Create fight table
 CREATE TABLE `fight` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -61,8 +76,12 @@ CREATE TABLE `fight` (
   `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `eventId` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+);
+```
 
+[Fights Table](./assets/FightsTable.png)
+
+```sql
 -- Create event table
 CREATE TABLE `event` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -72,8 +91,12 @@ CREATE TABLE `event` (
   `dateAndTime` date NOT NULL,
   `location` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+);
+```
 
+[Events Table](./assets/EventsTable.png)
+
+```sql
 -- Add foreign key constraints
 ALTER TABLE `fighter` ADD CONSTRAINT `FK_fighter_fighter_stats` FOREIGN KEY (`fighterStatsId`) REFERENCES `fighter_stats`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -84,5 +107,6 @@ ALTER TABLE `fighters_fights` ADD CONSTRAINT `FK_fighters_fights_fight` FOREIGN 
 ALTER TABLE `fighters_fights` ADD CONSTRAINT `FK_fighters_fights_fighter` FOREIGN KEY (`fighterId`) REFERENCES `fighter`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `fight` ADD CONSTRAINT `FK_fight_event` FOREIGN KEY (`eventId`) REFERENCES `event`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 ```
+
+[Tables](./assets/Tables.png)
