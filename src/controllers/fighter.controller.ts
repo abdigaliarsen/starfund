@@ -37,4 +37,10 @@ export class FighterController {
     async deleteFighter(@Param('id') id: number): Promise<void> {
         return await this.fighterUseCases.deleteFighter(id);
     }
+
+    @Put('update-rankings')
+    @ApiResponse({ status: 200, description: 'Update ranking' })
+    async updateRanking(): Promise<void> {
+        return await this.fighterUseCases.updateRankings();
+    }
 }

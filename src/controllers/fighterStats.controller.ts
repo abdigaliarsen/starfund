@@ -37,4 +37,10 @@ export class FighterStatsController {
     async deleteFighterStats(@Param('id') id: number): Promise<void> {
         return await this.fighterStatsUseCases.deleteFighterStats(id);
     }
+
+    @Put('finish-fight/:winnerStatsId/:loserStatsId')
+    @ApiResponse({ status: 200, description: 'Finish fight' })
+    async finishFight(@Param('winnerStatsId') winnerStatsId: number, @Param('loserStatsId') loserStatsId: number): Promise<void> {
+        return await this.fighterStatsUseCases.finishFight(winnerStatsId, loserStatsId);
+    }
 }

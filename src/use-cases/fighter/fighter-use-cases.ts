@@ -43,4 +43,8 @@ export class FighterUseCases {
     async deleteFighter(fighterId: number): Promise<void> {
         return this.dataServices.fighters.delete(fighterId);
     }
+
+    async updateRankings(): Promise<void> {
+        return this.dataServices.fighters.updateRankings();
+    }
 };

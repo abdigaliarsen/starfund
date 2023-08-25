@@ -43,4 +43,8 @@ export class FighterStatsUseCases {
     async deleteFighterStats(fighterStatsId: number): Promise<void> {
         return this.dataServices.fighterStats.delete(fighterStatsId);
     }
+    
+    async finishFight(winnerStatsId: number, loserStatsId: number): Promise<void> {
+        return this.dataServices.fighterStats.finishFight(winnerStatsId, loserStatsId);
+    }
 };
