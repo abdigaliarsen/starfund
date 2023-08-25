@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DATA_BASE_CONFIGURATION } from 'src/configuration';
 import { MySQLDataServices } from './mysql-data-services.service';
 import { Event, Fight, Fighter, FighterPersonalData, FighterStats, FightersFights } from './model';
 import { IDataServices } from 'src/core';

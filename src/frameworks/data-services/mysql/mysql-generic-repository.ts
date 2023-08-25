@@ -4,8 +4,8 @@ import { BaseEntity } from "./model/base.model";
 import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 
 export class MySQLGenericRepository<T extends BaseEntity> implements IGenericRepository<T> {
-    private _repository: Repository<T>;
-    private _populateOnFind: string[];
+    protected readonly _repository: Repository<T>;
+    protected readonly _populateOnFind: string[];
 
     constructor(repository: Repository<T>, populateOnFind: string[] = []) {
         this._repository = repository;

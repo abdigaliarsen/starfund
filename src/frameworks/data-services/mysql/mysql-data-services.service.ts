@@ -4,15 +4,21 @@ import { IDataServices } from "../../../core";
 import { Repository } from "typeorm";
 import { Event, Fight, Fighter, FighterPersonalData, FighterStats, FightersFights } from "./model";
 import { MySQLGenericRepository } from "./mysql-generic-repository";
+import { MySQLEventsRepository } from "./specific-repositories/mysql-events-repository";
+import { MySQLFightRepository } from "./specific-repositories/mysql-fight-repository";
+import { MySQLFighterRepository } from "./specific-repositories/mysql-fighter-repository";
+import { MySQLFighterPersonalDataRepository } from "./specific-repositories/mysql-fighterPersonalData-repository";
+import { MySQLFighterStatsRepository } from "./specific-repositories/mysql-fighterStats-repository";
+import { MySQLFightersFightsRepository } from "./specific-repositories/mysql-fightersFight-repository";
 
 @Injectable()
 export class MySQLDataServices implements IDataServices, OnApplicationBootstrap {
-    events: MySQLGenericRepository<Event>;
-    fights: MySQLGenericRepository<Fight>;
-    fighters: MySQLGenericRepository<Fighter>;
-    fighterPersonalData: MySQLGenericRepository<FighterPersonalData>;
-    fighterStats: MySQLGenericRepository<FighterStats>;
-    fightersFights: MySQLGenericRepository<FightersFights>;
+    events: MySQLEventsRepository;
+    fights: MySQLFightRepository;
+    fighters: MySQLFighterRepository;
+    fighterPersonalData: MySQLFighterPersonalDataRepository;
+    fighterStats: MySQLFighterStatsRepository;
+    fightersFights: MySQLFightersFightsRepository;
     
     constructor(
         @InjectRepository(Event)
@@ -30,11 +36,11 @@ export class MySQLDataServices implements IDataServices, OnApplicationBootstrap 
     ) {}
 
     async onApplicationBootstrap() {
-        this.events = new MySQLGenericRepository<Event>(this._eventRepository);
-        this.fights = new MySQLGenericRepository<Fight>(this._fightRepository);
-        this.fighters = new MySQLGenericRepository<Fighter>(this._fighterRepository);
-        this.fighterPersonalData = new MySQLGenericRepository<FighterPersonalData>(this._fighterPersonalDataRepository);
-        this.fighterStats = new MySQLGenericRepository<FighterStats>(this._fighterStatsRepository);
-        this.fightersFights = new MySQLGenericRepository<FightersFights>(this._fightersFightsRepository);
+        this.events = new MySQLEventsRepository(this._eventRepository);
+        this.fights = new MySQLFightRepository(this._fightRepository);
+        this.fighters = new MySQLFighterRepository(this._fighterRepository);
+        this.fighterPersonalData = new MySQLFighterPersonalDataRepository(this._fighterPersonalDataRepository);
+        this.fighterStats = new MySQLFighterStatsRepository(this._fighterStatsRepository);
+        this.fightersFights = new MySQLFightersFightsRepository(this._fightersFightsRepository);
     };
 }

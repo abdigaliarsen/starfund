@@ -1,24 +1,22 @@
 import {
-    Event,
-    Fight,
-    Fighter,
-    FighterPersonalData,
-    FighterStats,
-    FightersFights
-} from "src/frameworks/data-services/mysql/model";
-
-import { IGenericRepository } from "./generic-repository.abstract";
+    IEventRepository,
+    IFightsRepository,
+    IFighterPersonalDataRepository,
+    IFighterRepository,
+    IFighterStatsRepository,
+    IFightersFightsRepository
+} from "./specific-repositories";
 
 export abstract class IDataServices {
-    abstract events: IGenericRepository<Event>;
+    abstract events: IEventRepository;
 
-    abstract fights: IGenericRepository<Fight>;
+    abstract fights: IFightsRepository;
     
-    abstract fighters: IGenericRepository<Fighter>;
+    abstract fighters: IFighterRepository;
 
-    abstract fighterPersonalData: IGenericRepository<FighterPersonalData>;
+    abstract fighterPersonalData: IFighterPersonalDataRepository;
 
-    abstract fighterStats: IGenericRepository<FighterStats>;
+    abstract fighterStats: IFighterStatsRepository;
 
-    abstract fightersFights: IGenericRepository<FightersFights>;
+    abstract fightersFights: IFightersFightsRepository;
 };
