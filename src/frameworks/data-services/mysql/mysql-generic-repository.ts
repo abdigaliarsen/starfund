@@ -16,7 +16,6 @@ export class MySQLGenericRepository<T extends BaseEntity> implements IGenericRep
         return this._repository.find({ relations: this._populateOnFind });
     }
 
-    // TODO: replace find with findOneBy
     get(entityId: number): Promise<T | null> {
         return this._repository
             .createQueryBuilder()
@@ -29,7 +28,6 @@ export class MySQLGenericRepository<T extends BaseEntity> implements IGenericRep
     }
 
     async update(entityId: number, entity: T): Promise<T> {
-        entity["updatedAt"] = new Date();
         await this._repository
             .createQueryBuilder()
             .update()
