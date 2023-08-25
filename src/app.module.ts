@@ -14,6 +14,9 @@ import { FighterPersonalDataUseCasesModule } from './use-cases/fighterPersonalDa
 import { FighterStatsUseCasesModule } from './use-cases/fighterStats/fighterStats-use-cases.module';
 import { FightersFightsController } from './controllers/fightersFights.controller';
 import { FightersFightsUseCasesModule } from './use-cases/fightersFight/fightersFight-use-cases.module';
+import { APP_FILTER } from '@nestjs/core';
+import { ErrorsFilter } from './filters/errors.filter';
+import { DatabaseExceptionsFilter } from './filters/databaseExceptions.filter';
 
 @Module({
 	imports: [
@@ -33,6 +36,15 @@ import { FightersFightsUseCasesModule } from './use-cases/fightersFight/fighters
 		FighterPersonalDataController,
 		FightersFightsController
 	],
-	providers: []
+	providers: [
+		{
+			provide: APP_FILTER,
+			useClass: ErrorsFilter,
+		},
+		{
+			provide: APP_FILTER,
+			useClass: DatabaseExceptionsFilter
+		}
+	]
 })
 export class AppModule { }
