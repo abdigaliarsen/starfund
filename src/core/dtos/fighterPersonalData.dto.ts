@@ -3,10 +3,6 @@ import { IsNotEmpty, IsString, IsNumber, IsDate } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class FighterPersonalDataDto {
-    @IsNumber()
-    @ApiProperty({ description: 'The fighterId of the fighter' })
-    fighterId: number;
-
     @IsNotEmpty()
     @IsString()
     @ApiProperty({ description: 'The fullname of the fighter' })
@@ -43,10 +39,10 @@ export class FighterPersonalDataDto {
     @ApiProperty({ description: 'The reach of the fighter' })
     reach: number;
 
-    @IsDate()
     @IsNotEmpty()
-    @ApiProperty({ description: 'The dateOfBirth of the fighter' })
-    born: Date;
+    @IsString()
+    @ApiProperty({ description: 'The born city&country of the fighter' })
+    born: string;
 }
 
 export class CreateFighterPersonalDataDto extends FighterPersonalDataDto { }

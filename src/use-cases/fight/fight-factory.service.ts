@@ -6,8 +6,6 @@ export class FightFactoryService {
     createNewFight(createFightDto: CreateFightDto) {
         const fight: FightDto = {
             eventId: createFightDto.eventId,
-            fighter1Id: createFightDto.fighter1Id,
-            fighter2Id: createFightDto.fighter2Id,
         };
         
         return fight;

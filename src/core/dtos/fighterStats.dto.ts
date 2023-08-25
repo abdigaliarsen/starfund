@@ -4,10 +4,6 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class FighterStatsDto {
     @IsNumber()
-    @ApiProperty({ description: 'The fighterId of the fighter' })
-    fighterId: number;
-
-    @IsNumber()
     @ApiProperty({ description: 'The ranking of the fighter' })
     wins: number;
 

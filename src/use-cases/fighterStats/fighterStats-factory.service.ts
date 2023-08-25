@@ -5,7 +5,6 @@ import { CreateFighterStatsDto, FighterStatsDto, UpdateFighterStatsDto } from "s
 export class FighterStatsFactoryService {
     createNewFighterStats(createFighterStatsDto: CreateFighterStatsDto) {
         const fighterStats: FighterStatsDto = {
-            fighterId: createFighterStatsDto.fighterId,
             wins: createFighterStatsDto.wins,
             losses: createFighterStatsDto.losses,
             careerDisclosedEarnings: createFighterStatsDto.careerDisclosedEarnings,

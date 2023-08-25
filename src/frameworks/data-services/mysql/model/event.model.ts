@@ -16,7 +16,4 @@ export class Event extends BaseEntity {
 
     @OneToMany(() => Fight, fight => fight.event, { cascade: true })
     fights: Fight[];
-
-    @ManyToMany(() => Fighter, fighter => fighter.events)
-    participatingFighters: Fighter[];
 }

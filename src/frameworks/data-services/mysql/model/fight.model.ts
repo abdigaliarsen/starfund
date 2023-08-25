@@ -6,9 +6,12 @@ import { FightersFights } from "./fightersFights.model";
 
 @Entity()
 export class Fight extends BaseEntity {
+    @Column()
+    eventId: number;
+
     @ManyToOne(() => Event, event => event.fights)
     event: Event;
 
-    @ManyToOne(() => FightersFights, fightersFights => fightersFights.fight)
+    @OneToMany(() => FightersFights, fightersFights => fightersFights.fight)
     fightersFights: FightersFights[];
 }

@@ -7,9 +7,15 @@ import { FightersFights } from "./fightersFights.model";
 
 @Entity()
 export class Fighter extends BaseEntity {
+    @Column()
+    fighterStatsId: number;
+
     @OneToOne(_ => FighterStats, stats => stats.fighter)
     @JoinColumn()
     fighterStats: FighterStats;
+
+    @Column()
+    fighterPersonalDataId: number;
 
     @OneToOne(_ => FighterPersonalData, personalData => personalData.fighter)
     @JoinColumn()
@@ -17,9 +23,6 @@ export class Fighter extends BaseEntity {
 
     @OneToMany(() => FightersFights, fightersFights => fightersFights.fighter)
     fightersFights: FightersFights[];
-
-    @ManyToMany(() => Event, event => event.participatingFighters)
-    events: Event[];
 
     @Column()
     ranking: number;

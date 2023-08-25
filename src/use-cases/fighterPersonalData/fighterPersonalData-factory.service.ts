@@ -11,7 +11,6 @@ export class FighterPersonalDataFactoryService {
             reach: createEventDto.reach,
             born: createEventDto.born,
             dateOfBirth: createEventDto.dateOfBirth,
-            fighterId: createEventDto.fighterId,
             fullname: createEventDto.fullname,
             nickname: createEventDto.nickname,
             weightClass: createEventDto.weightClass,

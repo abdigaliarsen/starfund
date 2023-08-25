@@ -1,4 +1,6 @@
-```sql
+```
+sql
+-- Create fighter_stats table
 CREATE TABLE `fighter_stats` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -10,12 +12,9 @@ CREATE TABLE `fighter_stats` (
   `lastFightDate` date NOT NULL,
   `careerDisclosedEarnings` int NOT NULL,
   PRIMARY KEY (`id`)
-);
-```
+) ENGINE=InnoDB;
 
-![Fighters Stats Table](./assets/FighterStatsTable.png)
-
-```sql
+-- Create fighter_personal_data table
 CREATE TABLE `fighter_personal_data` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -30,40 +29,41 @@ CREATE TABLE `fighter_personal_data` (
   `reach` int NOT NULL,
   `born` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-);
-```
+) ENGINE=InnoDB;
 
-![Fighter Personal Data Table](./assets/FighterPersonalDataTable.png)
-
-```sql
+-- Create fighter table
 CREATE TABLE `fighter` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fighterStatsId` int NOT NULL,
+  `fighterPersonalDataId` int NOT NULL,
   `ranking` int NOT NULL,
-  `fighterStatsId` int NULL,
-  `fighterPersonalDataId` int NULL,
-  UNIQUE INDEX `REL_5a0e36a153e18834f4acb76ec2` (`fighterStatsId`),
-  UNIQUE INDEX `REL_9cb29876fbc59bfb23db95ab2b` (`fighterPersonalDataId`),
+  UNIQUE INDEX `REL_fighter_stats_id` (`fighterStatsId`),
+  UNIQUE INDEX `REL_fighter_personal_data_id` (`fighterPersonalDataId`),
   PRIMARY KEY (`id`)
-);
-```
+) ENGINE=InnoDB;
 
-![Fighters Table](./assets/FightersTable.png)
+-- Create fighters_fights table
+CREATE TABLE `fighters_fights` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fighterId` int NOT NULL,
+  `fightId` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
 
-```sql
+-- Create fight table
 CREATE TABLE `fight` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `eventId` int NULL,
+  `eventId` int NOT NULL,
   PRIMARY KEY (`id`)
-);
-```
+) ENGINE=InnoDB;
 
-![Fights Table](./assets/FightsTable.png)
-
-```sql
+-- Create event table
 CREATE TABLE `event` (
   `id` int NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -72,23 +72,17 @@ CREATE TABLE `event` (
   `dateAndTime` date NOT NULL,
   `location` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB;
+
+-- Add foreign key constraints
+ALTER TABLE `fighter` ADD CONSTRAINT `FK_fighter_fighter_stats` FOREIGN KEY (`fighterStatsId`) REFERENCES `fighter_stats`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `fighter` ADD CONSTRAINT `FK_fighter_fighter_personal_data` FOREIGN KEY (`fighterPersonalDataId`) REFERENCES `fighter_personal_data`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `fighters_fights` ADD CONSTRAINT `FK_fighters_fights_fight` FOREIGN KEY (`fightId`) REFERENCES `fight`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `fighters_fights` ADD CONSTRAINT `FK_fighters_fights_fighter` FOREIGN KEY (`fighterId`) REFERENCES `fighter`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `fight` ADD CONSTRAINT `FK_fight_event` FOREIGN KEY (`eventId`) REFERENCES `event`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 ```
-
-![Events Table](./assets/EventsTable.png)
-
-```sql
-ALTER TABLE `fighter` ADD CONSTRAINT `FK_5a0e36a153e18834f4acb76ec22` 
-FOREIGN KEY (`fighterStatsId`) REFERENCES `fighter_stats`(`id`) 
-ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE `fighter` ADD CONSTRAINT `FK_9cb29876fbc59bfb23db95ab2be` 
-FOREIGN KEY (`fighterPersonalDataId`) REFERENCES `fighter_personal_data`(`id`) 
-ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE `fight` ADD CONSTRAINT `FK_5b977841fa5df7809fede4adb2b` 
-FOREIGN KEY (`eventId`) REFERENCES `event`(`id`) 
-ON DELETE NO ACTION ON UPDATE NO ACTION;
-```
-
-![Tables](./assets/Tables.png)
