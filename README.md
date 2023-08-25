@@ -1,4 +1,4 @@
-![Entity Relationship Diagram](./ERD.png)
+![Entity Relationship Diagram](./assets/ERD.png)
 
 ```sql
 -- Create fighter_stats table
@@ -17,7 +17,7 @@ CREATE TABLE `fighter_stats` (
 );
 ```
 
-
+![Fighter Stats](./assets/FighterStatsTable.png)
 
 ```sql
 -- Create fighter_personal_data table
@@ -39,7 +39,7 @@ CREATE TABLE `fighter_personal_data` (
 );
 ```
 
-
+![Fighter Personal Data](./assets/FighterPersonalDataTable.png)
 
 ```sql
 -- Create fighter table
@@ -57,7 +57,7 @@ CREATE TABLE `fighter` (
 );
 ```
 
-
+![Fighter](./assets/FightersTable.png)
 
 ```sql
 -- Create fighters_fights table
@@ -72,7 +72,7 @@ CREATE TABLE `fighters_fights` (
 );
 ```
 
-
+![Fighters Fights](./assets/FightersFightsTable.png)
 
 ```sql
 -- Create fight table
@@ -86,7 +86,7 @@ CREATE TABLE `fight` (
 );
 ```
 
-
+![Fight](./assets/FightsTable.png)
 
 ```sql
 -- Create event table
@@ -102,7 +102,7 @@ CREATE TABLE `event` (
 );
 ```
 
-
+![Event](./assets/EventsTable.png)
 
 ```sql
 -- Add foreign key constraints
@@ -116,3 +116,5 @@ ALTER TABLE `fighters_fights` ADD CONSTRAINT `FK_fighter_fights_fighter` FOREIGN
 
 ALTER TABLE `fight` ADD CONSTRAINT `FK_fight_event` FOREIGN KEY (`eventId`) REFERENCES `event`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ```
+
+![Tables](./assets/Tables.png)
