@@ -66,7 +66,7 @@ CREATE TABLE `fighters_fights` (
 );
 ```
 
-![Fighters Fights Table](./assets/FighterFightsTable.png)
+![Fighter Fights Table](./assets/FighterFightsTable.png)
 
 ```sql
 -- Create fight table
